@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #f8f9fa;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-left: 4px solid #007bff;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li:hover {
+      background-color: #e9ecef;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #6c757d;
+      background-color: #e2e6ea;
+      border-left-color: #6c757d;
+    }
+
+    .complete-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .complete-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 20px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        margin-right: 0;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .complete-btn {
+        margin-top: 10px;
+        align-self: flex-end;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Task List</h1>
+
+    <form id="taskForm">
+      <input type="text" id="taskInput" placeholder="Enter a new task" required>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const taskForm = document.getElementById('taskForm');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    taskForm.addEventListener('submit', function(e) {
+      e.preventDefault();  // Prevent form submission
+
+      const taskText = taskInput.value;
+
+      if (taskText.trim() !== '') {
+        addTask(taskText);
+        taskInput.value = '';  // Clear the input field
+      }
+    });
+
+    function addTask(taskText) {
+      const li = document.createElement('li');
+      li.textContent = taskText;
+
+      const completeBtn = document.createElement('button');
+      completeBtn.textContent = 'Complete';
+      completeBtn.classList.add('complete-btn');
+      completeBtn.addEventListener('click', function() {
+        li.classList.toggle('completed');
+      });
+
+      li.appendChild(completeBtn);
+      taskList.appendChild(li);
+    }
+  </script>
+
+</body>
+</html>
