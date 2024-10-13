@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Task</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Add a New Task</h1>
+
+  <form id="taskForm">
+    <input type="text" id="taskInput" placeholder="Enter a task" required>
+    <button type="submit">Add Task</button>
+  </form>
+
+  <script>
+    const taskForm = document.getElementById('taskForm');
+    const taskInput = document.getElementById('taskInput');
+
+    taskForm.addEventListener('submit', function(e) {
+      e.preventDefault();  // Prevent form submission
+
+      const taskText = taskInput.value;
+      if (taskText.trim() !== '') {
+        alert(`Task "${taskText}" has been added!`);
+        taskInput.value = '';  // Clear the input field
+      }
+    });
+  </script>
+
+</body>
+</html>
